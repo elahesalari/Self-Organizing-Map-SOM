@@ -27,7 +27,9 @@ of distinct terms in the document collection 𝐷.
 An approach for computing 𝑣𝑖𝑗 is the Term Frequency - Inverse Document Frequency (TF-IDF) 
 weighting scheme. This method computes 𝑣𝑖𝑗 for term 𝑡𝑗
 in document 𝑑𝑖 as:
+<br/>
 ![formula](https://user-images.githubusercontent.com/91370511/159134697-02c91891-bf44-47a4-97dc-c3ea5f097b42.PNG)
+<br/>
 
 where 𝑡𝑓𝑖𝑗 is the frequency of term 𝑡𝑗 in document 𝑑𝑖, and 𝑑𝑓𝑗 is the number of documents in 𝐷 containing term 𝑡𝑗.
 Read ‘bbc-text.csv’ file and for each document: 

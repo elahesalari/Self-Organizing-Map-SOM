@@ -1,55 +1,59 @@
-# Self-Organizing-Map-(SOM)
-<b> Text Clustering using SOM </b>
+# 🧠 Self-Organizing Map (SOM)
 
-Text clustering is an unsupervised process, used to separate a document collection into some 
-clusters on the basis of the similarity relationship between documents in the collection. Suppose 
-𝐷 = {𝑑1, … , 𝑑𝑁} be a collection of 𝑁 documents to be clustered. The task is to divide 𝐷 into 𝑘
-clusters 𝐶1, … , 𝐶𝑘 where 𝐶1 ∪ … ∪ 𝐶𝑘 = 𝐷 and 𝐶𝑖 ∩ 𝐶𝑗 = ∅, for 𝑖 ≠ 𝑗.
-<br/>
-SOM text clustering can be done in two main phases. The first phase is document preprocessing,
-which uses Vector Space Model (VSM) to generate a numeric vector for each text document. In 
-the next phase, SOM is applied on the document vectors to obtain document clusters. 
-<br/>
-<br/>
-<b> Dataset </b>
-<br/>
-In this project, we train and test an SOM network to do cluster analysis of a news 
-collection, from the BBC news website corresponding to stories in five topical areas from 2004-
-2005. This dataset is a collection of 2225 news document, categorized into 5 classes of 
-‘business’, ‘entertainment’, ‘politics’, ‘sport’, and ‘tech’.
+## 📄 Text Clustering using SOM
 
-<b> Phase 1: Document Preprocessing </b>
-<br/>
-By means of VSM, each document 𝑑𝑖 can be represented by an 𝑛-dimensional feature vector
-𝒗𝑖 =< 𝑣𝑖1, … , 𝑣𝑖𝑛 >, where 𝑣𝑖𝑗 is a representation of term 𝑡𝑗
-in document 𝑑𝑖 and 𝑛 is the number 
-of distinct terms in the document collection 𝐷. 
-An approach for computing 𝑣𝑖𝑗 is the Term Frequency - Inverse Document Frequency (TF-IDF) 
-weighting scheme. This method computes 𝑣𝑖𝑗 for term 𝑡𝑗
-in document 𝑑𝑖 as:
-<br/>
-![formula](https://user-images.githubusercontent.com/91370511/159134697-02c91891-bf44-47a4-97dc-c3ea5f097b42.PNG)
-<br/>
+Text clustering is an unsupervised learning technique that groups a collection of documents into clusters based on their similarity. Given a document collection \( D = \{d_1, \ldots, d_N\} \), the goal is to partition \( D \) into \( k \) clusters \( C_1, \ldots, C_k \) such that \( C_1 \cup \ldots \cup C_k = D \) and \( C_i \cap C_j = \emptyset \) for \( i \neq j \).
 
-where 𝑡𝑓𝑖𝑗 is the frequency of term 𝑡𝑗 in document 𝑑𝑖, and 𝑑𝑓𝑗 is the number of documents in 𝐷 containing term 𝑡𝑗.
-Read ‘bbc-text.csv’ file and for each document: 
-  1. Remove all non-letter characters from the documents.
-  2. Extract all words of the document and remove the short words (length ≤ 2).
-  3. Remove all stop words (e.g., ‘a’, ‘and’, ‘what’, …), given in file ‘stopwords.txt’.
-  4. Compute the feature vector for each document, using TF-IDF weighting scheme.
+SOM-based text clustering proceeds in two phases:  
+- **Phase 1:** Document preprocessing using the Vector Space Model (VSM) to convert text documents into numeric vectors  
+- **Phase 2:** Applying SOM on these vectors to generate document clusters
 
-<b> Phase 2: SOM Clustering </b>
+---
 
+## 🗃️ Dataset
 
-a) Winner-takes-all approach
-  1. Using all documents, build an SOM with one neuron for each class.
-  2. Depict the SOM-hits plot.
-  3. Compute and report the confusion matrix.
+We used the BBC news dataset containing 2,225 news documents categorized into 5 classes:  
+`business`, `entertainment`, `politics`, `sport`, and `tech`. The dataset covers stories from 2004-2005.
 
-b) On-center, off-surround approach
-  1. Using all documents, build an SOM with 3x3 neurons.
-  2. Depict the SOM-hits plot.
-  3. Compute the Euclidean distance of all documents to their winner neurons and sum up the 
-  distances.
-  4. Repeat steps 1-3 for 4x4 and 5x5 topologies.
-  5. Report and discuss the overall distances of three topologies.
+---
+
+## 🔍 Phase 1: Document Preprocessing
+
+Each document \( d_i \) is represented as an \( n \)-dimensional feature vector  
+\[
+\mathbf{v}_i = \langle v_{i1}, \ldots, v_{in} \rangle
+\]  
+where \( v_{ij} \) represents the weight of term \( t_j \) in document \( d_i \), and \( n \) is the total number of distinct terms in the collection.
+
+We computed \( v_{ij} \) using the Term Frequency-Inverse Document Frequency (TF-IDF) weighting scheme:
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/91370511/159134697-02c91891-bf44-47a4-97dc-c3ea5f097b42.PNG" alt="TF-IDF formula" />
+</p>
+
+where:  
+- \( tf_{ij} \) is the frequency of term \( t_j \) in document \( d_i \),  
+- \( df_j \) is the number of documents in which term \( t_j \) appears
+
+Preprocessing steps included:  
+1. Removing all non-letter characters  
+2. Extracting words and removing short words (length ≤ 2)  
+3. Removing stop words (from the provided `stopwords.txt`)  
+4. Computing TF-IDF vectors for each document
+
+---
+
+## 🧩 Phase 2: SOM Clustering
+
+### (a) Winner-takes-all Approach  
+- Built an SOM with one neuron per class using all documents
+- Visualized SOM hits plot  
+- Computed the confusion matrix for classification accuracy
+
+### (b) On-center, Off-surround Approach  
+- Built SOMs with 3×3 neurons using all documents  
+- Visualized SOM hits plot  
+- Computed the sum of Euclidean distances between documents and their winning neurons  
+- Repeated the process for 4×4 and 5×5 SOM topologies  
+- Compared the overall distances to evaluate cluster compactness across topologies
+
